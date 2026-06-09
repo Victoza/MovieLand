@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdFavorite } from "react-icons/md";
 
 const MovieCard = ({ movie }) => {
 
-  const Favourite = () => {
-    alert("Clicked")
+  // store like state per card
+  const [isFavourite, setIsFavourite] = useState(false)
+
+  const toggleFavourite = () => {
+    setIsFavourite(!isFavourite)
   }
 
   return (
@@ -22,10 +25,12 @@ const MovieCard = ({ movie }) => {
         {/* OVERLAY BUTTON */}
         <div className='absolute top-3 right-3'>
           <button
-            onClick={Favourite}
-            className='bg-black/60 p-2 rounded-full text-red-500 text-2xl cursor-pointer hover:scale-110 transition'
+            onClick={toggleFavourite}
+            className='bg-black/60 p-2 rounded-full text-2xl cursor-pointer hover:scale-110 transition'
           >
-            <MdFavorite />
+            <MdFavorite
+              className={isFavourite ? "text-red-500" : "text-white"}
+            />
           </button>
         </div>
 
