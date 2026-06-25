@@ -105,7 +105,7 @@ const Landing = () => {
         </div>
       ) : (
         /* Movies Grid */
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+        <div className="grid grid-cols-[repeat(auto-fit,250px)] justify-center gap-x-4 gap-y-8">
           {movies.map((movie) => (
             <MovieCard movie={movie} key={movie.id} />
           ))}

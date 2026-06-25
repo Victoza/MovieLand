@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { MdFavorite } from "react-icons/md";
+import { useMovieContext } from '../contexts/MovieContext';
 
 const MovieCard = ({ movie }) => {
-
-  // store like state per card
-  const [isFavourite, setIsFavourite] = useState(false)
+  const { addToFavourites, removeFromFavourites, isFavourite } = useMovieContext()
+  const favourite = isFavourite(movie.id)
 
   const toggleFavourite = () => {
-    setIsFavourite(!isFavourite)
+    if (favourite) {
+      removeFromFavourites(movie.id)
+    } else {
+      addToFavourites(movie)
+    }
   }
 
   return (
@@ -27,9 +31,10 @@ const MovieCard = ({ movie }) => {
           <button
             onClick={toggleFavourite}
             className='bg-black/60 p-2 rounded-full text-2xl cursor-pointer hover:scale-110 transition'
+            aria-label={favourite ? "Remove from favourites" : "Add to favourites"}
           >
             <MdFavorite
-              className={isFavourite ? "text-red-500" : "text-white"}
+              className={favourite ? "text-red-500" : "text-white"}
             />
           </button>
         </div>
